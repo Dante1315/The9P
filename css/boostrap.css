@@ -1,0 +1,71 @@
+#menu{
+    width: 100%;
+    position: fixed;
+}
+
+.Lateral{
+    box-sizing: border-box;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 19%;
+    width: 22%;
+    left: 77%;
+    overflow-x: hidden;
+    padding-top: 20px;
+    /*parte lateral de comunicados y grupos*/
+    text-align: center;
+}
+
+.grupos{
+    width: 99%;
+}
+
+.grupos table{ 
+    width: 100%;
+    height: 50%;
+    text-align: center;
+}
+
+.public{
+     /* Arriba | Derecha | Abajo | Izquierda */
+    padding: 13% 27% 0% 17%;   
+}
+
+.publicaciones{
+    /*   */
+    box-sizing: border-box;  
+}
+
+.publicaciones nav{
+    /* Nombre de la página */
+    margin: 1.5% 0;
+    display: flex;
+    align-items:center;
+    color: #494949; 
+}
+
+#publicacionA {
+    /* Agregar publicación alumno */
+    width: 100.3%;
+    border: 2px solid #FEFEFE (0, 0, 0, 0.01);
+    box-sizing: border-box;
+    border-radius: 0px;
+    background-color: #FCFCFC;
+    box-shadow: 0px 4px 15px rgba(75, 57, 57, 0.25);
+}
+
+#publicacionA form{
+    margin: 2%;
+}
+#publi{
+    box-sizing: border-box;
+    margin: 1.5% 0;
+    display: flex;
+}
+#publicacion{
+    width: 100.3%;
+    box-sizing: border-box;
+    position: relative;
+    border-collapse: collapse;
+}

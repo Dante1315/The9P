@@ -1,0 +1,93 @@
+html body{
+    background-color: #983051;
+}
+.RegistrarA{
+    /* Registrar */
+   position: relative;
+   width: 40%;
+   background: rgba(250, 238, 242);
+   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.35);
+   border-radius: 15px;
+   margin-bottom: auto;
+   margin-top: 0%;
+   margin-left: auto;
+   margin-right: 2%;   
+}
+.RegistrarA form{
+    margin: 5%;
+    text-align: center;
+}
+.RegistrarA a{
+    color: #983056;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+}
+.RegistrarA h2{
+    color: #411425;
+    font-size: 1.7em;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+}
+.RegistrarA h3{
+    color: #411425;
+    font-size: .99em;
+    font-family: 'Noto Sans', sans-serif;
+    text-align: justify;
+}
+.RegistrarA a:hover{
+    color: #500f27;
+    text-decoration: none;
+}
+.error p{
+    color: #411425;
+    font-size: 1.2em;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+
+}
+
+
+
+#planet{
+    transform: rotate(-179.85deg);
+    position: fixed;
+    margin-left: 0%;
+    width: 60%;
+    height: 100%;
+    top: 85%;  
+    border-radius: 0%; 
+
+}
+
+#planet svg{
+    width: 100%;
+    height: 200%; 
+}
+
+#I a{
+    color: #FFFF; 
+    position: absolute;
+}
+
+#I a{
+    position: absolute;
+    height: 114px;
+    left: 20.5%;
+    top: 50%;
+
+}
+
+#f {
+    position: fixed;
+    margin-top: -3%;
+}
+  
+

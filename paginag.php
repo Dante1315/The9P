@@ -1,4 +1,5 @@
 
+
 <?php
     session_start();
     require('clases/clases.php');
@@ -9,22 +10,40 @@
 
    if(isset($_GET['id_g'])){
     $publi=grupos::mostrarp($_GET['id_g']);
-
-       $mgg=grupos::busca($_GET['id_g']);
-      
+    $edo=grupos::edo($_GET['id_g'],$_SESSION['id_usu']);
+    $mgg=grupos::busca($_GET['id_g']);
+    $admin=grupos::verificaradmin($_GET['id_g'],$_SESSION['id_usu']);
 
     } 
+    function consoleLog($msg) {
+		echo '<script type="text/javascript">' .
+        'console.log('.$_GET["id_g"].');</script>';
+	}
+
+	consoleLog('.$_GET["id_g"].');
+
+    if(isset($_GET['agregar'])){
+        $idMG=$_GET['agregar'];
+        grupos::aceptar($idMG);
+    }
+    if(isset($_GET['eliminar'])){
+        $idMG=$_GET['eliminar'];
+        grupos::eliminar($idMG);
+    }
     if(isset($_POST['publicar']) and !empty($_FILES) and !empty($_POST['txt'])){
-        $destino='fotos/';
-        $texto_publi=$_POST['txt'];
-        $foto_publi=$destino . $_FILES['imagen']['name'];
-         $tmp=$_FILES['imagen']['tmp_name'];
-         $id_g=$_POST['publicar'];
-        publi::publicaciong($_SESSION['id_usu'],$texto_publi,$foto_publi,$id_g);
-        move_uploaded_file($tmp,$foto_publi);
-        header('location:inicio.php');
+    $destino='fotos/';
+    $texto_publi=$_POST['txt'];
+    $foto_publi=$destino . $_FILES['imagen']['name'];
+        $tmp=$_FILES['imagen']['tmp_name'];
+        $id_g=$_POST['publicar'];
+    publi::publicaciong($_SESSION['id_usu'],$texto_publi,$foto_publi,$id_g);
+    move_uploaded_file($tmp,$foto_publi);
+    header('location:inicio.php');
+    }else{
+    }
+    
         
-}
+
 
 if(isset($_GET['acceso'])){
     $envia_am=$_SESSION['id_usu'];
@@ -222,12 +241,17 @@ if(isset($_POST['comentar']) and !empty($_POST['txtcom'])){
    
    
     <section class="public">
-        <h4>Bienvenido al grupo  <?php echo $mgg[0]['nom_g']?></h4>
         <div class="publicaciones">
-            <div class="publicacionA">
-                <img src="<?php echo $mgg[0]['foto_g'];?>" width="150px" height="100%"></img>
+            <!--Nombre de la pagina-->
+            <nav id="nombrepagina">
+                    <h4>Bienvenido al grupo  <?php echo $mgg[0]['nom_g']?></h4>
+                        
+                    </nav>
+                <div class="publicacionA">
+                <img src="<?php echo $mgg[0]['foto_g'];?>"></img>
                 <div class="textpublicacionA">
                     <table class="table">
+                      
                         <thead>
                             <tr>
                                 <th colspan="2"><?php echo $mgg[0]['nom_g'];?></th>
@@ -239,19 +263,90 @@ if(isset($_POST['comentar']) and !empty($_POST['txtcom'])){
                                 <td><?php echo $mgg[0]['descripcion'];?></td>
                             </tr>
                             <tr>
-                                <th scope="row" colspan="2"><a href="paginag.php?acceso=<?php echo $_GET['id_g'];?>">acceso</a></th>  
+
+                            <th scope="row">Estado</th>
+                            <?php if($mgg[0]['id_usu']==$_SESSION['id_usu']):?>
+                                
+
+                                <td><h7>Administrador</h7> <td>
+                                <tr>
+
+                                <th scope="row"></th>
+                                <td> <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#solicitudes">
+                                        Solicitudes
+                                    </button></td>
                             </tr>
-                            <td colspan="2">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editar">
-                                    Editar
-                                </button>
-                            </td>
+                            <?php if(empty($edo)):?>
+                                <td>
+                           <a href="paginag.php?acceso=<?php echo $_GET['id_g'];?>">acceso</a> <td>
+                            
+                            <?php elseif($edo[0]['estado']==0):?>
+                                <td><h7>Solicitud pendiente</h7> <td>
+                                <td>  <?php elseif($edo[0]['estado']==1):?>
+                                        <h7>Miembro del grupo</h7>
+
+                                <?php endif;?>
+                                <?php endif;?>
+
+                            <td>
+                                
+
+
+                        </tr>
                         </tbody>
                     </table>
-                    
+                   
+                </div>
+            </div>
+            <?php if($mgg[0]['id_usu']==$_SESSION['id_usu']):?>
+                    <td colspan="2">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#editar">
+                                        Editar
+                                    </button>
+
+                                </td>
+                                <?php endif;?>
+
                 </div>
             </div>
             <br>
+
+            <div id="publicacionA">
+                <form action="<?php echo $_SERVER['PHP_SELF'];?>"enctype="multipart/form-data" method="post">
+                    <fieldset>
+                        <br>
+                        <legend>¿Qué esta sucediendo?</legend>
+                        <br>
+                        <div class="form-group">
+                            <textarea 
+                                class="form-control" id="exampleTextarea" rows="3" 
+                                type="text" name="txt" data-bs-toggle="collapse" href="#publicar" 
+                                aria-expanded="false" aria-controls="collapseExample" 
+                                placeholder="¿Qué esta sucediendo?">
+                            </textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="formFile" class="form-label mt-4"> Agrega una imagen </label>
+                            <input 
+                                class="form-control"  id="formFile"
+                                type="file" name="imagen"  
+                                accept="image/png,image/jpeg">
+                            
+                        </div>
+                        <br>
+                        <div class="bottonA">
+                            <input type="submit" name="publicar" class="btn btn-primary" data-bs-toggle="collapse" href="#publicar" 
+                                aria-expanded="false" aria-controls="collapseExample"; value="<?php echo ($_GET['id_g']);?>"> 
+                            </input>
+                    </div>
+                     </fieldset>
+                </form>
+                <br>
+            </div>
+        
+            
             <div class="">
                 <?php
                 if(!empty($publi)):
@@ -564,6 +659,57 @@ if(isset($_POST['comentar']) and !empty($_POST['txtcom'])){
                 </div>
             </div>
         </div>
+                                            
+
+        <div class="modal fade" id="solicitudes" aria-hidden="true" aria-labelledby="restablecercontraseña"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="restablecercontraseña">Solicitudes</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <?php $soli=grupos::solicitud($_GET['id_g']);?>
+
+                       <h5><?php if(count($soli)>0);?></h5>
+                        <?php if(count($soli)>0):?>
+                            <?php foreach($soli as $solis):?>
+                                <table>
+                                <tr>
+                                    <td>
+                                    <a href="p.php?id_usu=<?php echo $solis['id_usu']?>"><?php echo $solis['nom_usu']," ",$solis['app_usu']," ",$solis['apm_usu']?> </a>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+
+                                    <td>
+                                    <a href="paginag.php?agregar=<?php echo $solis['idMG']?>">Aceptar</a>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    <a href="paginag.php?eliminar=<?php echo $solis['idMG']?>">Eliminar</a>
+                                    </td>
+
+
+                                </tr>
+                                </table>        
+                                <?php endforeach;?>
+                                <?php else:?>
+                                    <h2><?php echo ""?></h2>
+                                <?php endif;?>
+
+                
+                </div>
+                
+            </div>
+        </div>
+    </div>
     <!-- Modal de Crear grupos -->
     <!-- Modal de notificaciones -->
     <?php $no=noti::mostrar($_SESSION['id_usu'])?>

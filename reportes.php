@@ -103,7 +103,10 @@
         </nav> 
     </div>
     <section class="public">
-        <h4>Bienvenid@ </h4>
+    <h4>Bienvenid@ 
+           
+           </h4>
+         
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
@@ -127,6 +130,7 @@
 		</div>
     </section>
 
+      
     
     <div class="modal" id="AgregarADMI">
         <div class="modal-dialog" role="document">
@@ -205,6 +209,7 @@
             </div>
         </div>
     </div>
+
 </body>
 </html>
 

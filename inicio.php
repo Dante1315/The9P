@@ -143,9 +143,7 @@
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="material-icons-outlined">workspaces</span></a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="perfil.php"> tu perfil </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#restablecerContraseña">Restableecer contraseña</a>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#AvisoPrivacidad">aviso de privacidad</a>
+                                
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="cerrars.php" >cerrar sesion</a>
                             </div>

@@ -49,7 +49,7 @@
 </head>
 <STYLE>A {text-decoration: none;} </STYLE>
 <body>
-    <div id="menu">
+<div id="menu">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="inicio.php"> 
@@ -72,7 +72,7 @@
                 <div class="collapse navbar-collapse" id="navbarColor03">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="inicio.php"  data-bs-toggle="tooltip" data-bs-placement="top" title="Inicio">
+                            <a class="nav-link active" href="inicio.php"  data-bs-toggle="tooltip" data-bs-placement="top" title="Inicio">
                                 <span class="material-icons-outlined">public</span>
                             </a>
                         </li>
@@ -80,7 +80,7 @@
                             <a class="nav-link" href="comunicados.php"  data-bs-toggle="tooltip" data-bs-placement="top" title="Comunicados"><span class="material-icons-outlined">spatial_tracking</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="chats.php"  data-bs-toggle="tooltip" data-bs-placement="top" title="mensajes"><span class="material-icons-outlined">star</span></a>
+                            <a class="nav-link" href="chats.php"  data-bs-toggle="tooltip" data-bs-placement="top" title="mensajes"><span class="material-icons-outlined">star</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="modal" data-bs-target="#notificacion" data-bs-toggle="tooltip" data-bs-placement="top" title="Notificaciones" ><span class="material-icons-outlined">auto_awesome</span></a>
@@ -113,9 +113,7 @@
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="material-icons-outlined">workspaces</span></a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="perfil.php"> tu perfil </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#restablecerContraseña">Restableecer contraseña</a>
-                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#AvisoPrivacidad">aviso de privacidad</a>
+                                
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="cerrars.php" >cerrar sesion</a>
                             </div>
@@ -131,6 +129,7 @@
             </div>
         </nav> 
     </div>
+    <section c
     <section class="Lateral">
         <!--Grupos-->
         <div class="grupos">

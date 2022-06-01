@@ -430,6 +430,17 @@ class grupos {
         ));
 
     }
+    public static function verificaradmin($id_g,$id_usu){
+        $conn=conexion("be76f7e687d567","1e15a88c");
+        $consulta=$conn->prepare("select * from grupos where (id_g=:id_g and id_usu=:id_usu)");
+        $consulta->execute(array(
+            ':id_g'=>$id_g,
+            ':id_usu'=>$id_usu));
+        $resultado=$consulta->fetchAll();
+        return $resultado;
+
+    }
+
 
     public static function editar($nom_g,$descripcion,$id_g){
         $conn=conexion("be76f7e687d567","1e15a88c");
@@ -444,13 +455,42 @@ class grupos {
 
     public static function acceso($envia_am,$recibe_am){
         $conn=conexion("be76f7e687d567","1e15a88c");
-        $consulta=$conn->prepare("insert into mg(idMG,id_usu,id_g,fecha) values(null,:envia_am,:recibe_am,Now())");
+        $consulta=$conn->prepare("insert into mg(idMG,id_usu,id_g,estado,fecha) values(null,:envia_am,:recibe_am,0,Now())");
         $consulta->execute(array(':envia_am'=>$envia_am,':recibe_am'=>$recibe_am));
+        
     }
     public static function mostrarp($amigos){
         $conn=conexion("be76f7e687d567","1e15a88c");
         $consulta=$conn->prepare("select U.id_usu,U.rol_usu,U.nom_usu,U.alias_usu,U.foto_usu,P.id_publi,P.texto_publi,P.foto_publi,P.fecha_publi,P.id_g from usuarios U inner join publicaciones P on U.id_usu=P.id_usu where  P.id_g in ($amigos)  ORDER BY P.id_publi DESC");
         $consulta->execute();
+        $resultado=$consulta->fetchAll();
+        return $resultado;
+    }
+    public static function edo($id_g,$id_usu){
+        $conn=conexion("be76f7e687d567","1e15a88c");
+        $consulta=$conn->prepare("select * from mg where (id_g=:id_g and id_usu=:id_usu)");
+        $consulta->execute(array(':id_g'=>$id_g,':id_usu'=>$id_usu));
+        $resultado=$consulta->fetchAll();
+        return $resultado;
+    }
+    public static function solicitud($id_g){
+        $conn=conexion("be76f7e687d567","1e15a88c");
+        $consulta=$conn->prepare("select U.id_usu,U.nom_usu,U.app_usu,U.apm_usu,G.idMG,G.id_usu from usuarios U inner join mg G on U.id_usu=G.id_usu where G.id_g=:id_g and G.estado!=1");
+        $consulta->execute(array(':id_g'=>$id_g));
+        $resultado=$consulta->fetchAll();
+        return $resultado;
+    }
+    public static function aceptar($idMG){
+        $conn=conexion("be76f7e687d567","1e15a88c");
+        $consulta=$conn->prepare(" update mg set estado=1 where idMG=:idMG");
+        $consulta->execute(array(':idMG'=>$idMG));
+        $resultado=$consulta->fetchAll();
+        return $resultado;
+    }
+    public static function eliminar($idMG){
+        $conn=conexion("be76f7e687d567","1e15a88c");
+        $consulta=$conn->prepare("delete from mg where idMG=:idMG");
+        $consulta->execute(array(':idMG'=>$idMG));
         $resultado=$consulta->fetchAll();
         return $resultado;
     }
